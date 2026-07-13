@@ -49,17 +49,17 @@ export async function POST(req: NextRequest) {
       message: "Account created successfully",
     });
 
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+  console.error("SIGNUP ERROR:", error);
 
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Internal Server Error",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  return NextResponse.json(
+    {
+      success: false,
+      message: error?.message || "Internal Server Error",
+    },
+    {
+      status: 500,
+    }
+  );
+}
 }
